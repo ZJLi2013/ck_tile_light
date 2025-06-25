@@ -31,7 +31,7 @@ add_definitions(-DCK_ENABLE_INT8 -DCK_ENABLE_FP16 -DCK_ENABLE_FP32 -DCK_ENABLE_F
 
 # Find HIP
 find_package(hip REQUIRED)
-add_definitions(__HIP_PLATFORM_AMD__=1)
+add_compile_definitions(__HIP_PLATFORM_AMD__=1)
 
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 17)
@@ -50,14 +50,14 @@ target_include_directories(ck_tile INTERFACE
     ${HIP_INCLUDE_DIRS}
 )
 
-# Install headers
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/ck_tile
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-        FILES_MATCHING PATTERN "*.hpp")
+# Include standard installation directories
+include(GNUInstallDirs)
 
-# Install config.h
-install(FILES ${PROJECT_BINARY_DIR}/include/ck_tile/config.h
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/ck_tile)
+# Build examples if requested
+option(BUILD_EXAMPLES "Build examples" ON)
+if(BUILD_EXAMPLES)
+    add_subdirectory(example)
+endif()
 
 # Create and install package config
 include(CMakePackageConfigHelpers)
@@ -72,6 +72,16 @@ configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/Config.cmake.in
     INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/ck_tile
 )
 
+# Install headers
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/ck_tile
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        FILES_MATCHING PATTERN "*.hpp")
+
+# Install config.h
+install(FILES ${PROJECT_BINARY_DIR}/include/ck_tile/config.h
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/ck_tile)
+
+# Install package config files
 install(FILES
     "${CMAKE_CURRENT_BINARY_DIR}/ck_tileConfig.cmake"
     "${CMAKE_CURRENT_BINARY_DIR}/ck_tileConfigVersion.cmake"
