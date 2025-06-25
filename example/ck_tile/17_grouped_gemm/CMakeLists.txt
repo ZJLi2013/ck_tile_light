@@ -1,2 +1,2 @@
 add_executable(tile_example_grouped_gemm EXCLUDE_FROM_ALL grouped_gemm.cpp)
-
+target_link_libraries(tile_example_grouped_gemm PRIVATE ck_tile)

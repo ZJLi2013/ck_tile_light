@@ -1,1 +1,2 @@
 add_executable(tile_example_batched_gemm EXCLUDE_FROM_ALL batched_gemm.cpp)
+target_link_libraries(tile_example_batched_gemm PRIVATE ck_tile)

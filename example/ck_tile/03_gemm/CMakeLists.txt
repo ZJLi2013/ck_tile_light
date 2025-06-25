@@ -1,5 +1,8 @@
 add_executable(tile_example_gemm_basic gemm_basic.cpp)
 add_executable(tile_example_gemm_universal universal_gemm.cpp)
+# Link against ck_tile to get proper include paths
+target_link_libraries(tile_example_gemm_basic PRIVATE ck_tile)
+target_link_libraries(tile_example_gemm_universal PRIVATE ck_tile)
 set(EXAMPLE_GEMM_COMPILE_OPTIONS)
 if(CK_USE_OCP_FP8)
   list(APPEND EXAMPLE_GEMM_COMPILE_OPTIONS -DCK_TILE_USE_OCP_FP8)

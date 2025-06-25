@@ -48,6 +48,9 @@ target_include_directories(ck_tile INTERFACE
     ${PROJECT_BINARY_DIR}/include
     ${PROJECT_SOURCE_DIR}/include
     ${HIP_INCLUDE_DIRS}
+    # Add uk directories for flatmm includes
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ck_tile/ops/flatmm/block/uk
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ck_tile/ops/flatmm/block    
 )
 
 # Include standard installation directories

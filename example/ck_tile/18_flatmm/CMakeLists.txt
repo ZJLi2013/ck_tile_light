@@ -1,5 +1,5 @@
 add_executable(tile_example_flatmm_basic EXCLUDE_FROM_ALL flatmm_basic.cpp)
-
+target_link_libraries(tile_example_flatmm_basic PRIVATE ck_tile)
 set(EXAMPLE_FLATMM_COMPILE_OPTIONS)
 # list(APPEND EXAMPLE_FLATMM_COMPILE_OPTIONS -Wno-undefined-func-template -Wno-float-equal)
 # list(APPEND EXAMPLE_FLATMM_COMPILE_OPTIONS -Wno-unused-variable -Wno-unused-parameter)
